@@ -34,6 +34,11 @@ public class Follow : MonoBehaviour {
         {
             transform.position = new Vector3(10, 1, 10);
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            follow = !follow;
+        }
     }
 
 

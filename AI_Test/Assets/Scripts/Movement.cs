@@ -31,5 +31,10 @@ public class Movement : MonoBehaviour {
             transform.position += new Vector3(0, 0, -0.5f);
         }
 
+        if (transform.position.y < -1)
+        {
+            transform.position = new Vector3(0 , 0, 0);
+        }
+
     }
 }
