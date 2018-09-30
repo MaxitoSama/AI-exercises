@@ -44,6 +44,6 @@ public class Move : MonoBehaviour {
         transform.position += mov_velocity * Time.deltaTime;
 
         // Reset movement to 0 to simplify things ...
-        mov_velocity = Vector3.zero;
+        //mov_velocity = Vector3.zero;
 	}
 }
