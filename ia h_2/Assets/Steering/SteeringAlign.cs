@@ -19,7 +19,12 @@ public class SteeringAlign : MonoBehaviour {
 	{
         // TODO 7: Very similar to arrive, but using angular velocities
         // Find the desired rotation and accelerate to it
-        // Use Vector3.SignedAngle() to find the angle between two directions
+        // Use Vector3.SignedAngle() to find the angle between two direction
 
+        Vector3 desired_v = (move.target.transform.position - move.transform.position).normalized * move.max_mov_velocity;
+        Vector3 axis= new Vector3(0, 1, 0);
+        float angle = Vector3.SignedAngle(move.movement, desired_v,axis);
+
+        move.AccelerateRotation(angle);
     }
 }
