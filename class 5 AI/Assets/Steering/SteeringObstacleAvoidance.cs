@@ -25,7 +25,8 @@ public class SteeringObstacleAvoidance : MonoBehaviour {
         Ray myRay= new Ray(move.transform.position, move.movement);
         if (Physics.Raycast(myRay, out hit,avoid_distance,mask))
         {
-            seek.Steer(hit.point + hit.normal);
+			Vector3 distance=hit.point + hit.normal;
+            seek.Steer(new Vector3(distance.x,0,distance.z));
         }
 
 		// 2- Calculate a quaternion with rotation based on movement vector
