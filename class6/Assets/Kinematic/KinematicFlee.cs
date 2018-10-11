@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KinematicFlee : MonoBehaviour {
+public class KinematicFlee : SteeringAbstract {
 
 	Move move;
 
@@ -17,6 +17,6 @@ public class KinematicFlee : MonoBehaviour {
 		diff.Normalize ();
 		diff *= move.max_mov_velocity;
 
-		move.SetMovementVelocity(diff);
+		move.SetMovementVelocity(diff,priority);
 	}
 }

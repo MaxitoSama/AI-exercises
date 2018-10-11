@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteeringPursue : MonoBehaviour {
+public class SteeringPursue : SteeringAbstract
+{
 
 	public float max_prediction;
 
@@ -17,14 +18,14 @@ public class SteeringPursue : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		Steer(move.target.transform.position, move.target.GetComponent<Move>().movement);
+		Steer(move.target.transform.position, move.target.GetComponent<Move>().movement[priority]);
 	}
 
 	public void Steer(Vector3 target, Vector3 velocity)
 	{
 		Vector3 diff = target - transform.position;
 		float distance = diff.magnitude;
-		float my_speed = move.movement.magnitude;
+		float my_speed = move.movement[priority].magnitude;
 		float prediction;
 
 		// is the speed too small ?

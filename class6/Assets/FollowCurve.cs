@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BansheeGz.BGSpline.Components;
 
-public class FollowCurve : MonoBehaviour
+public class FollowCurve : SteeringAbstract
 {
     float currentRatio = 0.0f;
     public BGCcMath path;

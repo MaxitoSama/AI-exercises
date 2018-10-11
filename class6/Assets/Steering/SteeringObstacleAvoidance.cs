@@ -8,7 +8,8 @@ public class my_ray
     public Vector3 direction = Vector3.forward;
 }
 
-public class SteeringObstacleAvoidance : MonoBehaviour {
+public class SteeringObstacleAvoidance : SteeringAbstract
+{
 
     public LayerMask mask;
     public float avoid_distance = 5.0f;
@@ -26,7 +27,7 @@ public class SteeringObstacleAvoidance : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
-        float angle = Mathf.Atan2(move.movement.x, move.movement.z);
+        float angle = Mathf.Atan2(move.movement[priority].x, move.movement[priority].z);
         Quaternion q = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up);
 
         foreach(my_ray ray in rays)
@@ -44,7 +45,7 @@ public class SteeringObstacleAvoidance : MonoBehaviour {
         {
             // Display the explosion radius when selected
             Gizmos.color = Color.red;
-            float angle = Mathf.Atan2(move.movement.x, move.movement.z);
+            float angle = Mathf.Atan2(move.movement[priority].x, move.movement[priority].z);
             Quaternion q = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up);
 
             foreach(my_ray ray in rays)

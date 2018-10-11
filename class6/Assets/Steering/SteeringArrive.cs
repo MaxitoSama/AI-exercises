@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteeringArrive : MonoBehaviour {
+public class SteeringArrive : SteeringAbstract
+{
 
 	public float min_distance = 0.1f;
 	public float slow_distance = 5.0f;
@@ -30,7 +31,7 @@ public class SteeringArrive : MonoBehaviour {
         //If the distance to the target is less than min_distance just stop moving
         if (direction.magnitude < min_distance)
         {
-            move.SetMovementVelocity(Vector3.zero);
+            move.SetMovementVelocity(Vector3.zero,priority);
             return;
         }
 
@@ -41,7 +42,7 @@ public class SteeringArrive : MonoBehaviour {
         if (direction.magnitude < slow_distance)
             desired_velocity *= (direction.magnitude / slow_distance);
 
-        Vector3 desired_accel = desired_velocity - move.movement;
+        Vector3 desired_accel = desired_velocity - move.movement[priority];
         desired_accel /= time_to_target;
 
         //Clamp desired acceleration
@@ -50,7 +51,7 @@ public class SteeringArrive : MonoBehaviour {
             desired_accel = desired_accel.normalized * move.max_mov_acceleration;
         }
 
-        move.AccelerateMovement(desired_accel);
+        move.AccelerateMovement(desired_accel,priority);
     }
 
 	void OnDrawGizmosSelected() 

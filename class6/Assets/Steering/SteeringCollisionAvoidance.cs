@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteeringCollisionAvoidance : MonoBehaviour {
+public class SteeringCollisionAvoidance : SteeringAbstract
+{
 
 	public LayerMask mask;
 	public float search_radius = 5.0f;
@@ -40,7 +41,7 @@ public class SteeringCollisionAvoidance : MonoBehaviour {
 
             // calculate time to collision
             Vector3 relative_pos = go.transform.position - transform.position;
-            Vector3 relative_vel = target_move.movement - move.movement;
+            Vector3 relative_vel = target_move.movement[priority] - move.movement[priority];
             float relative_speed = relative_vel.magnitude;
             float time_to_collision = Vector3.Dot(relative_pos, relative_vel) / relative_speed * relative_speed;
 
@@ -71,7 +72,7 @@ public class SteeringCollisionAvoidance : MonoBehaviour {
          	else
          		escape_pos = target_relative_pos + target_relative_vel * target_shortest_time;
 
-         	move.AccelerateMovement(- (escape_pos.normalized * move.max_mov_acceleration));
+         	move.AccelerateMovement(- (escape_pos.normalized * move.max_mov_acceleration),priority);
          }
     }
 

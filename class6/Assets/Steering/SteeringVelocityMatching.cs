@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteeringVelocityMatching : MonoBehaviour {
+public class SteeringVelocityMatching : SteeringAbstract
+{
 
 	public float time_to_target = 0.25f;
 
@@ -20,10 +21,10 @@ public class SteeringVelocityMatching : MonoBehaviour {
 		if(target_move)
 		{
 			// Create a vector that describes the ideal velocity
-			Vector3 ideal_movement = transform.forward * target_move.movement.magnitude;
+			Vector3 ideal_movement = transform.forward * target_move.movement[priority].magnitude;
 
 			// Calculate acceleration needed to match that velocity
-			Vector3 acceleration = ideal_movement - move.movement;
+			Vector3 acceleration = ideal_movement - move.movement[priority];
 			acceleration /= time_to_target;
 
 			// Cap acceleration
@@ -33,7 +34,7 @@ public class SteeringVelocityMatching : MonoBehaviour {
 				acceleration *= move.max_mov_acceleration;
 			}
 
-			move.AccelerateMovement(acceleration);
+			move.AccelerateMovement(acceleration,priority);
 		}
 	}
 }

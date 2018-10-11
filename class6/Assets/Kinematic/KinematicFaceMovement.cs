@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KinematicFaceMovement : MonoBehaviour {
+public class KinematicFaceMovement : SteeringAbstract {
 
 	public float min_angle = 1.0f;
 
@@ -15,7 +15,7 @@ public class KinematicFaceMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		float target_degrees = Mathf.Atan2(move.movement.x, move.movement.z) * Mathf.Rad2Deg;
+		float target_degrees = Mathf.Atan2(move.movement[priority].x, move.movement[priority].z) * Mathf.Rad2Deg;
 		//transform.eulerAngles = new Vector3(0.0f, target_degrees, 0.0f);
 
 
@@ -23,8 +23,8 @@ public class KinematicFaceMovement : MonoBehaviour {
 		float delta = Mathf.DeltaAngle(target_degrees, current_degrees);
 
 		if(Mathf.Abs(delta) < min_angle)
-			move.SetRotationVelocity(0.0f);
+			move.SetRotationVelocity(0.0f,priority);
 		else
-			move.SetRotationVelocity(-delta);
+			move.SetRotationVelocity(-delta,priority);
 	}
 }
